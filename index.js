@@ -77,10 +77,20 @@ module.exports.assets = function (options) {
                                 if (!filenames.length) {
                                     filenames.push(pattern);
                                 }
-                                try {
-                                    buffer.push(stripBom(fs.readFileSync(filenames[0])));
-                                } catch (err) {
-                                    this.emit('error', new gutil.PluginError('gulp-useref', err));
+                                if (!opts.addNotConcat) {
+                                    try {
+                                        buffer.push(stripBom(fs.readFileSync(filenames[0])));
+                                    } catch (err) {
+                                        this.emit('error', new gutil.PluginError('gulp-useref', err));
+                                    }
+                                } else {
+                                    joinedFile = new gutil.File({
+                                        path:     filenames[0],
+                                        cwd:      file.cwd,
+                                        base:     path.dirname(filenames[0]),
+                                        contents: fs.readFileSync(filenames[0])
+                                    });
+                                    this.push(joinedFile);
                                 }
                             }
                         }, this);

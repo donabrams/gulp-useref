@@ -1,9 +1,12 @@
-# [gulp](https://github.com/gulpjs/gulp)-useref [![Build Status](https://travis-ci.org/jonkemp/gulp-useref.png?branch=master)](https://travis-ci.org/jonkemp/gulp-useref)
-
 > Parse build blocks in HTML files to replace references to non-optimized scripts or stylesheets with [useref](https://github.com/digisfera/useref)
 
 Inspired by the grunt plugin [grunt-useref](https://github.com/pajtai/grunt-useref). It can handle file concatenation but not minification. Files are then passed down the stream. For minification of assets or other modifications, use [gulp-filter](https://github.com/sindresorhus/gulp-filter) to filter specific types of assets.
 
+## FORK DESCRIPTION
+
+This fork differs from the main by including the "addNotConcat" option. When this
+option is true, it adds all the files that would be concated to the stream instead 
+of adding the concated files to the stream
 
 ## Install
 

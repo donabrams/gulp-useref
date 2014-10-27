@@ -43,6 +43,32 @@ function compare(name, expectedName, done) {
 }
 
 describe('useref()', function() {
+    it('should add matching files to the stream if options.addNotConcat', function(done) {
+        var a = 0;
+
+        var testFile = getFixture('02.html');
+
+        var stream = useref.assets({addNotConcat: true});
+
+        var firstFile = path.normalize('./test/fixtures/scripts/this.js');
+        var secondFile = path.normalize('./test/fixtures/scripts/that.js');
+        var matchedFirst = false;
+        stream.on('data', function(newFile){
+            should.exist(newFile.contents);
+            newFile.path.should.equal(matchedFirst ? secondFile : firstFile);
+            matchedFirst = true;
+            ++a;
+        });
+
+        stream.once('end', function () {
+            a.should.equal(2);
+            done();
+        });
+
+        stream.write(testFile);
+
+        stream.end();
+    });
     it('file should pass through', function(done) {
         var a = 0;
 
