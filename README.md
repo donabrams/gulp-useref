@@ -6,7 +6,7 @@ Inspired by the grunt plugin [grunt-useref](https://github.com/pajtai/grunt-user
 
 This fork differs from the main by including the "addNotConcat" option. When this
 option is true, it adds all the files that would be concated to the stream instead 
-of adding the concated files to the stream
+of adding a single concated file to the stream
 
 ## Install
 
